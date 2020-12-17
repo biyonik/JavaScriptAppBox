@@ -9,4 +9,6 @@
 
 <hr>
 <h4>Uygulama Listesi</h4>
-<i>Uygulamalar eklendiği sürece burada listelenecek</i>
+<ol>
+    <li>Basic Form Validator: <small>Basit düzeyde form doğrulama işleminin yapıldığı VanilyaJS uygumalası</small></li>
+</ol>

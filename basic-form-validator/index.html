@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Basic Form Validator App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <form id="form" class="form">
+            <h2>Kayıt Olun</h2>
+            <div class="form-control">
+                <label for="kullanici_adi">Kullanıcı Adı</label>
+                <input type="text" id="kullanici_adi" placeholder="Kullanıcı adınızı giriniz">
+                <small>Hata Mesajı</small>
+            </div>
+
+            <div class="form-control">
+                <label for="eposta">E-Posta</label>
+                <input type="text" id="eposta" placeholder="E-Posta adresinizi giriniz">
+                <small>Hata Mesajı</small>
+            </div>
+
+            <div class="form-control">
+                <label for="parola">Parola</label>
+                <input type="password" id="parola" placeholder="Parolanızı giriniz">
+                <small>Hata Mesajı</small>
+            </div>
+
+            <div class="form-control">
+                <label for="parola_tekrar">Parola Tekrar</label>
+                <input type="password" id="parola_tekrar" placeholder="Parolanızı tekrar giriniz">
+                <small>Hata Mesajı</small>
+            </div>
+            <button type="submit">Kayıt Ol</button>
+        </form>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
