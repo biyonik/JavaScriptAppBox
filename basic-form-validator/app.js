@@ -19,35 +19,52 @@ const showSuccess = (input) => {
 
 const isValidEmail = (input) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(input).toLowerCase());
+    if (re.test(input.value.trim()) === false) {
+        showError(input, `${getFieldName(input)} alanı geçerli bir e-posta adresi değil!`)
+    } else {
+        showSuccess(input);
+    }
 }
 
+const getFieldName = (field) => {
+    return field.id.charAt(0).toUpperCase() + field.id.substring(1, field.id.length)
+}
+
+const checkLength = (input, min, max) => {
+    if (input.value.length < min) {
+        showError(input, `${getFieldName(input)} alanı minimum ${min} karakter olmalıdır`);
+    } else if (input.value.length > max) {
+        showError(input, `${getFieldName(input)} alanı maksimum ${max} karakter olmalıdır`);
+    } else {
+        showSuccess(input);
+    }
+}
+
+const checkConfirmPassword = (parola, parola_tekrar) => {
+    if ((parola.value.trim() === parola_tekrar.value.trim()) && parola.value !== '' && parola_tekrar !== '') {
+        showSuccess(parola);
+        showSuccess(parola_tekrar);
+    } else {
+        showError(parola_tekrar, `${getFieldName(parola_tekrar)} alanı ${getFieldName(parola)} ile uyuşmuyor`)
+    }
+}
+
+const checkRequired = (inputArr) => {
+    inputArr.forEach((input) => {
+        if (input.value.trim() === '') {
+            showError(input, `${getFieldName(input)} alanı boş bırakılamaz`);
+        } else {
+            showSuccess(input)
+        }
+    });
+}
 
 form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (kullanici_adi.value === '') {
-        showError(kullanici_adi, 'Kullanıcı adı boş bırakılamaz!');
-    } else {
-        showSuccess(kullanici_adi);
-    }
-
-    if (eposta.value === '') {
-        showError(eposta, 'E-Posta adresi boş bırakılamaz!');
-    } else if (isValidEmail(eposta.value) !== true) {
-        showError(eposta, 'E-Posta adresi geçerli bir e-posta formatında değil!');
-    } else {
-        showSuccess(eposta)
-    }
-
-    if (parola.value === '') {
-        showError(parola, 'E-Posta adresi boş bırakılamaz!');
-    } else {
-        showSuccess(parola);
-    }
-
-    if (parola_tekrar.value === '') {
-        showError(parola_tekrar, 'E-Posta adresi boş bırakılamaz!');
-    } else {
-        showSuccess(parola_tekrar);
-    }
+    checkRequired([kullanici_adi, eposta, parola, parola_tekrar]);
+    checkLength(kullanici_adi, 3, 15);
+    checkLength(parola, 6, 20);
+    checkLength(parola_tekrar, 6, 20);
+    isValidEmail(eposta);
+    checkConfirmPassword(parola, parola_tekrar);
 });
